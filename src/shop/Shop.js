@@ -88,26 +88,11 @@ const Shop = () => {
 
   const addToCart = (item) => setCart((currentCart) => [...currentCart, item]);
 
-  const removeFromCart = (item) => {
-    setCart((currentCart) => {
-      const indexOfItemToRemove = currentCart.findIndex((cartItem) => cartItem.id === item.id);
-
-      if (indexOfItemToRemove === -1) {
-        return currentCart;
-      }
-
-      return [
-        ...currentCart.slice(0, indexOfItemToRemove),
-        ...currentCart.slice(indexOfItemToRemove + 1),
-      ];
-    });
-  };
-
   const amountOfItems = (id) => cart.filter((item) => item.id === id).length;
 
   const listItemsToBuy = () => items.map((item) => (
     <div key={item.id}>
-      {`${item.name}: $${item.price.toFixed(2)}`}
+      {`${item.name}: $${item.price.toFixed(2)} `}
       <button type="submit" onClick={() => addToCart(item)}>Add</button>
     </div>
   ));
@@ -124,26 +109,27 @@ const Shop = () => {
       if (itemAmt > 1) {
         cartItems.push(
           <div key={item.id}>
-            {`${item.name}`}: {itemAmt * itemPrice} ({itemAmt} @ ${itemPrice})
-          {/* <button type="submit" onClick={() => removeFromCart(item)}>Remove</button> */}
+            {`${item.name}`}: {(itemAmt * itemPrice).toFixed(2)} ({itemAmt} @ ${itemPrice})
           </div>);
       } else if (itemAmt === 1) {
         cartItems.push(
         <div key={item.id}>
           {`${item.name}`}: ${itemPrice}
-        {/* <button type="submit" onClick={() => removeFromCart(item)}>Remove</button> */}
         </div>);
       }
     })
-    return cartItems;
+
+    if (cartItems.length) return cartItems;
+
+    return <div>(cart is empty)</div>;
   };
 
   return (
     <div>
       STORE
-      <div>{listItemsToBuy()}</div>
+      <div>{listItemsToBuy()}</div><br />
       <div>CART</div>
-      <div>{listItemsInCart()}</div>
+      <div>{listItemsInCart()}</div><br />
       <div>Sales Taxes: ${taxTotal}</div>
       <div>Total: ${cartTotal}</div>
       <div>
