@@ -73,7 +73,7 @@ const Shop = () => {
           parseFloat((Math.ceil(cart[i].importTax * 20) / 20).toFixed(2));
       totalVal += tot; 
     }
-    setCartTotal(totalVal);
+    setCartTotal(totalVal.toFixed(2));
   };
 
   const tax = () => {
@@ -83,7 +83,7 @@ const Shop = () => {
         parseFloat((Math.ceil(cart[i].importTax * 20) / 20).toFixed(2));
       totalVal += tot;
     }
-    setTaxTotal(totalVal);
+    setTaxTotal(totalVal.toFixed(2));
   };
 
   const addToCart = (item) => setCart((currentCart) => [...currentCart, item]);
