@@ -112,12 +112,38 @@ const Shop = () => {
     </div>
   ));
 
-  const listItemsInCart = () => items.map((item) => (
-    <div key={item.id}>
-      ({amountOfItems(item.id)} x ${item.price}) {`${item.name}`}
-      <button type="submit" onClick={() => removeFromCart(item)}>Remove</button>
-    </div>
-  ));
+  // const listItemsInCart = () => items.map((item) => (
+  //   <div key={item.id}>
+  //     {`${item.name}`}: ({amountOfItems(item.id)} x ${item.price}) 
+  //     <button type="submit" onClick={() => removeFromCart(item)}>Remove</button>
+  //   </div>
+  // ));
+
+  const listItemsInCart = () => {
+    let cartItems = [];
+
+    items.forEach((item) => {
+      let itemAmt = amountOfItems(item.id);
+      let itemPrice = (item.price +
+        parseFloat((Math.ceil(item.basicTax * 20) / 20)) +
+          parseFloat((Math.ceil(item.importTax * 20) / 20))).toFixed(2);
+
+      if (itemAmt > 1) {
+        cartItems.push(
+          <div key={item.id}>
+            {`${item.name}`}: {itemAmt * itemPrice} ({itemAmt} @ ${itemPrice})
+          {/* <button type="submit" onClick={() => removeFromCart(item)}>Remove</button> */}
+          </div>);
+      } else if (itemAmt === 1) {
+        cartItems.push(
+        <div key={item.id}>
+          {`${item.name}`}: ${itemPrice}
+        {/* <button type="submit" onClick={() => removeFromCart(item)}>Remove</button> */}
+        </div>);
+      }
+    })
+    return cartItems;
+  };
 
   return (
     <div>
