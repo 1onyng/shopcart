@@ -25,9 +25,9 @@ const items = [
   {
     id: 4,
     name: "Imported chocolates",
-    price: 10,
+    price: 10.00,
     basicTax: 0,
-    importTax: 10 * .05
+    importTax: 10.00 * .05
   },
   {
     id: 5,
@@ -107,17 +107,10 @@ const Shop = () => {
 
   const listItemsToBuy = () => items.map((item) => (
     <div key={item.id}>
-      {`${item.name}: $${item.price}`}
+      {`${item.name}: $${item.price.toFixed(2)}`}
       <button type="submit" onClick={() => addToCart(item)}>Add</button>
     </div>
   ));
-
-  // const listItemsInCart = () => items.map((item) => (
-  //   <div key={item.id}>
-  //     {`${item.name}`}: ({amountOfItems(item.id)} x ${item.price}) 
-  //     <button type="submit" onClick={() => removeFromCart(item)}>Remove</button>
-  //   </div>
-  // ));
 
   const listItemsInCart = () => {
     let cartItems = [];
