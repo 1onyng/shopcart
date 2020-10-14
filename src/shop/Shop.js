@@ -1,39 +1,87 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const items = [
   {
     id: 1,
     name: "Book",
-    price: 12.49
+    price: 12.49,
+    basicTax: 0,
+    importTax: 0
   },
   {
     id: 2,
     name: "Music CD",
-    price: 14.99
+    price: 14.99,
+    basicTax: 14.99 * .1,
+    importTax: 0
   },
   {
     id: 3,
     name: "Chocolate bar",
-    price: 0.85
+    price: 0.85,
+    basicTax: false,
+    importTax: false
   },
   {
     id: 4,
-    name: "Imported Chocolate",
-    price: 10
+    name: "Imported chocolates",
+    price: 10,
+    basicTax: 0,
+    importTax: 10 * .05
   },
   {
     id: 5,
     name: "Perfume",
-    price: 18.99
+    price: 18.99, 
+    basicTax: 18.99 * .1,
+    importTax: 0
+  },
+  {
+    id: 6,
+    name: "Imported Perfume",
+    price: 47.50,
+    basicTax: 47.50 * .1,
+    importTax: 47.50 * .05
+  },
+  {
+    id: 7,
+    name: "Headache pills",
+    price: 9.75,
+    basicTax: 0,
+    importTax: 0
   },
 ];
 
 const Shop = () => {
-  const [cart, setCart] = React.useState([]);
-  const subTotal = cart.reduce((total, { price = 0 }) => total + price, 0);
-  const salesTax = subTotal * .1;
-  const cartTotal = subTotal + salesTax;
+  const [cart, setCart] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
+  const [taxTotal, setTaxTotal] = useState(0);
 
+  useEffect(() => {
+    total();
+  }, [cart]);
+
+  useEffect(() => {
+    tax();
+  }, [cart]);
+
+  const total = () => {
+    let totalVal = 0;
+    for (let i = 0; i < cart.length; i++) {
+      let tot = cart[i].price + cart[i].basicTax + cart[i].importTax;
+      totalVal += tot; 
+    }
+    setCartTotal(totalVal);
+  };
+
+  const tax = () => {
+    let totalVal = 0;
+    for (let i = 0; i < cart.length; i++) {
+      let tot = cart[i].basicTax + cart[i].importTax;
+      totalVal += tot;
+    }
+    setTaxTotal(totalVal);
+  };
 
   const addToCart = (item) => setCart((currentCart) => [...currentCart, item]);
 
@@ -74,10 +122,10 @@ const Shop = () => {
       <div>{listItemsToBuy()}</div>
       <div>CART</div>
       <div>{listItemsInCart()}</div>
-      <div>Sales Taxes: ${salesTax}</div>
+      <div>Sales Taxes: ${taxTotal}</div>
       <div>Total: ${cartTotal}</div>
       <div>
-        <button onClick={() => setCart([])}>Clear</button>
+        <button onClick={() => setCart([])}>Empty Cart</button>
       </div>
     </div>
   );
