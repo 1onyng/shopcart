@@ -19,8 +19,8 @@ const items = [
     id: 3,
     name: "Chocolate bar",
     price: 0.85,
-    basicTax: false,
-    importTax: false
+    basicTax: 0,
+    importTax: 0
   },
   {
     id: 4,
@@ -68,7 +68,9 @@ const Shop = () => {
   const total = () => {
     let totalVal = 0;
     for (let i = 0; i < cart.length; i++) {
-      let tot = cart[i].price + cart[i].basicTax + cart[i].importTax;
+      let tot = cart[i].price + 
+        parseFloat((Math.ceil(cart[i].basicTax * 20) / 20).toFixed(2)) + 
+          parseFloat((Math.ceil(cart[i].importTax * 20) / 20).toFixed(2));
       totalVal += tot; 
     }
     setCartTotal(totalVal);
@@ -77,7 +79,8 @@ const Shop = () => {
   const tax = () => {
     let totalVal = 0;
     for (let i = 0; i < cart.length; i++) {
-      let tot = cart[i].basicTax + cart[i].importTax;
+      let tot = parseFloat((Math.ceil(cart[i].basicTax * 20) / 20).toFixed(2)) + 
+        parseFloat((Math.ceil(cart[i].importTax * 20) / 20).toFixed(2));
       totalVal += tot;
     }
     setTaxTotal(totalVal);
