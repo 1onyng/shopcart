@@ -53,7 +53,8 @@ const items = [
 ];
 
 const Shop = () => {
-  const [cart, setCart] = useState([]);
+  //useState hook initializes cart as empty array. setCart makes changes to cart.
+  const [cart, setCart] = useState([]); 
   const [cartTotal, setCartTotal] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
 
