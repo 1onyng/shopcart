@@ -1,8 +1,11 @@
 import React from 'react';
+import Shop from './shop/Shop'
 
 function App() {
   return (
-    <div></div>
+    <div>
+      <Shop />
+    </div>
   );
 }
 
