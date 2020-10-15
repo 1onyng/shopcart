@@ -14,7 +14,6 @@
 
 * JavaScript
 * React
-* HTML
 
 I used [create-react-app](https://goo.gl/26jfy4)
 to generate the scaffolding for this app.
