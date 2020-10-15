@@ -132,13 +132,10 @@ const Shop = () => {
     <div>
       STORE
       <div>{listItemsToBuy()}</div><br />
-      <div>CART</div>
+      <div>CART <button onClick={() => setCart([])}>Clear Cart</button></div>
       <div>{listItemsInCart()}</div><br />
       <div>Sales Taxes: ${taxTotal}</div>
       <div>Total: ${cartTotal}</div>
-      <div>
-        <button onClick={() => setCart([])}>Empty Cart</button>
-      </div>
     </div>
   );
 };
