@@ -100,6 +100,10 @@ const Shop = () => {
 
   const amountOfItems = (id) => cart.filter((item) => item.id === id).length;
 
+  const clearCart = () => {
+    if (listItemsInCart().length) return <button onClick={() => setCart([])}>Clear Cart</button>;
+  }
+
   const listItemsToBuy = () => items.map((item) => (
     <div key={item.id}>
       {`${item.name}: $${item.price.toFixed(2)} `}
@@ -129,16 +133,15 @@ const Shop = () => {
       }
     })
 
-    if (cartItems.length) return cartItems;
-
-    return <div>(cart is empty)</div>;
+    if (!cartItems.length) return <div>(cart is empty)</div>;
+    return cartItems;
   };
 
   return (
     <div>
       STORE
       <div>{listItemsToBuy()}</div><br />
-      <div>CART <button onClick={() => setCart([])}>Clear Cart</button></div>
+      <div>CART {clearCart()}</div>
       <div>{listItemsInCart()}</div><br />
       <div>TOTAL</div>
       <div>Tax Total: ${taxTotal}</div>
