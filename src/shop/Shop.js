@@ -62,8 +62,9 @@ const Shop = () => {
   const [cartTotal, setCartTotal] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
 
-  //useEffect hook adjusts final and tax total each time state changes to cart.
-  //The dependency array, [cart] is used to achieve this.
+  /*useEffect hook adjusts final and tax totals. The dependency array, [cart] 
+  keeps track of state changes for the variable within the array. Every time an item is 
+  added, useEffect will detect the change and run their respective functions*/
   useEffect(() => {
     const calcFinalTotal = () => {
       let totalVal = 0;
