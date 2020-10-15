@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-//list of items for sale 
+/*List of items for sale. Basic tax is applied to all items at 10%, 
+except for books, food, and medical products. Import taxes are 
+applied to imported goods at 5%, with no exceptions.*/
 const items = [
   {
     id: 1,
@@ -60,15 +62,17 @@ const Shop = () => {
   const [cartTotal, setCartTotal] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
 
+  //useEffect hook adjusts final and tax total each time state changes to cart.
+  //The dependency array, [cart] is used to achieve this.
   useEffect(() => {
-    total();
+    calcFinalTotal();
   }, [cart]);
 
   useEffect(() => {
-    tax();
+    calcTaxTotal();
   }, [cart]);
 
-  const total = () => {
+  const calcFinalTotal = () => {
     let totalVal = 0;
     cart.forEach((item) => {
       //Calculate the total in taxes and then round to the nearest 5 cents.
@@ -81,7 +85,7 @@ const Shop = () => {
     setCartTotal(totalVal.toFixed(2));
   };
 
-  const tax = () => {
+  const calcTaxTotal = () => {
     let totalVal = 0;
     cart.forEach((item) => {
       //Calculate the total in taxes and then round to the nearest 5 cents.
@@ -137,8 +141,9 @@ const Shop = () => {
       <div>{listItemsToBuy()}</div><br />
       <div>CART <button onClick={() => setCart([])}>Clear Cart</button></div>
       <div>{listItemsInCart()}</div><br />
-      <div>Sales Taxes: ${taxTotal}</div>
-      <div>Total: ${cartTotal}</div>
+      <div>TOTAL</div>
+      <div>Tax Total: ${taxTotal}</div>
+      <div>Final Total: ${cartTotal}</div>
     </div>
   );
 };
