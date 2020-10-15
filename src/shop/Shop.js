@@ -55,6 +55,7 @@ const items = [
 const Shop = () => {
   //useState hook initializes cart as empty array. setCart makes changes to cart.
   const [cart, setCart] = useState([]); 
+  //cart total starts at 0 dollars
   const [cartTotal, setCartTotal] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
 
@@ -69,6 +70,7 @@ const Shop = () => {
   const total = () => {
     let totalVal = 0;
     for (let i = 0; i < cart.length; i++) {
+      //Calculate the total price and then round to the nearest 5 cents. 
       let tot = cart[i].price + 
         parseFloat((Math.ceil(cart[i].basicTax * 20) / 20).toFixed(2)) + 
           parseFloat((Math.ceil(cart[i].importTax * 20) / 20).toFixed(2));
