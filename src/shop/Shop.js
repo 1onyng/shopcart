@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+//list of items for sale 
 const items = [
   {
     id: 1,
@@ -71,9 +72,10 @@ const Shop = () => {
     let totalVal = 0;
     cart.forEach((item) => {
       //Calculate the total in taxes and then round to the nearest 5 cents.
-      let itemTotal = item.price + 
-        parseFloat((Math.ceil(item.basicTax * 20) / 20).toFixed(2)) +
-          parseFloat((Math.ceil(item.importTax * 20) / 20).toFixed(2));
+      let itemTotal = 
+        item.price + 
+        parseFloat((Math.ceil(item.basicTax * 20) / 20)) +
+        parseFloat((Math.ceil(item.importTax * 20) / 20));
       totalVal += itemTotal;
     }) 
     setCartTotal(totalVal.toFixed(2));
@@ -83,8 +85,9 @@ const Shop = () => {
     let totalVal = 0;
     cart.forEach((item) => {
       //Calculate the total in taxes and then round to the nearest 5 cents.
-      let itemTotal = parseFloat((Math.ceil(item.basicTax * 20) / 20).toFixed(2)) +
-        parseFloat((Math.ceil(item.importTax * 20) / 20).toFixed(2));
+      let itemTotal = 
+        parseFloat((Math.ceil(item.basicTax * 20) / 20)) +
+        parseFloat((Math.ceil(item.importTax * 20) / 20));
       totalVal += itemTotal;
     }) 
     setTaxTotal(totalVal.toFixed(2));
