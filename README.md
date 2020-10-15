@@ -12,7 +12,7 @@
 
 ### Technologies
 
-* JavaScript
+* TypeScript
 * React
 
 I used [create-react-app](https://goo.gl/26jfy4)
