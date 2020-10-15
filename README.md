@@ -20,6 +20,8 @@ npm start
 
 ### Design 
 
-A main requirement for this application is that it accepts input for shopping baskets and returns a receipt. I expect the app to behave similar to the shopping carts that online retailers use. React is an excellent front-end framework for this project because I expect many re-renders for the shopping cart and totals. React can quickly and efficiently handle these UI updates using its diffing algorithm. I also anticpate many state changes and since we are not perdsisting any data, I intent to use React hooks for state management.
+A main requirement for this application is that it accepts input for shopping baskets and returns a receipt. I designed the app to behave similar to the shopping carts that online retailers use. Users will be able to select from a list of items and add them to a cart that will keep track of all items purchased, the price of each item with appropriate taxes applied, the total in taxes, and final total. 
+
+React is an excellent front-end framework for this project because I expect many re-renders for the shopping cart and totals. React can quickly and efficiently handle these UI updates using its diffing algorithm. I also anticpate a lot of state changes and without a backend to persist data, the use of React hooks will be a good choice to manage these changes. 
 
 
