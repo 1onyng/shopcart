@@ -20,6 +20,6 @@ npm start
 
 ### Design 
 
-A main requirement for this application is that it accepts input for shopping baskets and returns a receipt. I am assuming that the app should behave similar to the shopping carts that are common with online retailers. React is an excellent front-end framework for this project because I expect many rerenders for a shopping cart, which React is fast and efficient at dealing with.
+A main requirement for this application is that it accepts input for shopping baskets and returns a receipt. I am assuming that the app should behave similar to the shopping carts that online retailers use. React is an excellent front-end framework for this project because I expect many rerenders for a shopping cart, which React is fast and efficient at dealing with.
 
 

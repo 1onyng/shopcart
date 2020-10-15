@@ -65,37 +65,35 @@ const Shop = () => {
   //useEffect hook adjusts final and tax total each time state changes to cart.
   //The dependency array, [cart] is used to achieve this.
   useEffect(() => {
+    const calcFinalTotal = () => {
+      let totalVal = 0;
+      cart.forEach((item) => {
+        //Calculate the total in taxes and then round to the nearest 5 cents.
+        let itemTotal =
+          item.price +
+          parseFloat((Math.ceil(item.basicTax * 20) / 20)) +
+          parseFloat((Math.ceil(item.importTax * 20) / 20));
+        totalVal += itemTotal;
+      })
+      setCartTotal(totalVal.toFixed(2));
+    };
     calcFinalTotal();
   }, [cart]);
 
   useEffect(() => {
+    const calcTaxTotal = () => {
+      let totalVal = 0;
+      cart.forEach((item) => {
+        //Calculate the total in taxes and then round to the nearest 5 cents.
+        let itemTotal =
+          parseFloat((Math.ceil(item.basicTax * 20) / 20)) +
+          parseFloat((Math.ceil(item.importTax * 20) / 20));
+        totalVal += itemTotal;
+      })
+      setTaxTotal(totalVal.toFixed(2));
+    };
     calcTaxTotal();
   }, [cart]);
-
-  const calcFinalTotal = () => {
-    let totalVal = 0;
-    cart.forEach((item) => {
-      //Calculate the total in taxes and then round to the nearest 5 cents.
-      let itemTotal = 
-        item.price + 
-        parseFloat((Math.ceil(item.basicTax * 20) / 20)) +
-        parseFloat((Math.ceil(item.importTax * 20) / 20));
-      totalVal += itemTotal;
-    }) 
-    setCartTotal(totalVal.toFixed(2));
-  };
-
-  const calcTaxTotal = () => {
-    let totalVal = 0;
-    cart.forEach((item) => {
-      //Calculate the total in taxes and then round to the nearest 5 cents.
-      let itemTotal = 
-        parseFloat((Math.ceil(item.basicTax * 20) / 20)) +
-        parseFloat((Math.ceil(item.importTax * 20) / 20));
-      totalVal += itemTotal;
-    }) 
-    setTaxTotal(totalVal.toFixed(2));
-  };
 
   const addToCart = (item) => setCart((currentCart) => [...currentCart, item]);
 
