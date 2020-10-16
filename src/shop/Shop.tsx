@@ -3,6 +3,14 @@ import React, { useState, useEffect } from "react";
 /*List of items for sale. Basic tax is applied to all items at 10%, 
 except for books, food, and medical products. Import taxes are 
 applied to imported goods at 5%, with no exceptions.*/
+type itemProps = {
+  id: number;
+  name: string;
+  price: number;
+  basicTax: number;
+  importTax: number;
+};
+
 const items = [
   {
     id: 1,
@@ -57,7 +65,7 @@ const items = [
 
 const Shop = () => {
   //useState hook initializes cart as empty array. setCart makes changes to cart.
-  const [cart, setCart] = useState([]); 
+  const [cart, setCart] = useState<Array<object>>([]); 
   //cart total and tax total starts at 0 dollars.
   const [cartTotal, setCartTotal] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
@@ -67,15 +75,16 @@ const Shop = () => {
   added, useEffect will detect the change and run their respective functions*/
   useEffect(() => {
     const calcFinalTotal = () => {
-      let totalVal = 0;
-      cart.forEach((item) => {
+      //totalVal assigned to type any to print trailing zeros
+      let totalVal: any = 0;
+      cart.forEach((item: itemProps) => {
         //Calculate the total in taxes and then round to the nearest 5 cents.
         let itemTotal =
           item.price +
-          parseFloat((Math.ceil(item.basicTax * 20) / 20)) +
-          parseFloat((Math.ceil(item.importTax * 20) / 20));
+          parseFloat((Math.ceil(item.basicTax * 20) / 20).toString()) +
+          parseFloat((Math.ceil(item.importTax * 20) / 20).toString());
         totalVal += itemTotal;
-      })
+      });
       setCartTotal(totalVal.toFixed(2));
     };
     calcFinalTotal();
@@ -83,12 +92,13 @@ const Shop = () => {
 
   useEffect(() => {
     const calcTaxTotal = () => {
-      let totalVal = 0;
-      cart.forEach((item) => {
+      //totalVal assigned to type any to print trailing zeros
+      let totalVal: any = 0;
+      cart.forEach((item: itemProps) => {
         //Calculate the total in taxes and then round to the nearest 5 cents.
         let itemTotal =
-          parseFloat((Math.ceil(item.basicTax * 20) / 20)) +
-          parseFloat((Math.ceil(item.importTax * 20) / 20));
+          parseFloat((Math.ceil(item.basicTax * 20) / 20).toString()) +
+          parseFloat((Math.ceil(item.importTax * 20) / 20).toString());
         totalVal += itemTotal;
       })
       setTaxTotal(totalVal.toFixed(2));
@@ -98,11 +108,11 @@ const Shop = () => {
 
   const addToCart = (item) => setCart((currentCart) => [...currentCart, item]);
 
-  const amountOfItems = (id) => cart.filter((item) => item.id === id).length;
+  const amountOfItems = (id) => cart.filter((item: itemProps) => item.id === id).length;
 
   const clearCart = () => {
     if (listItemsInCart().length) return <button onClick={() => setCart([])}>Clear Cart</button>;
-  }
+  };
 
   const listItemsToBuy = () => items.map((item) => (
     <div key={item.id}>
@@ -112,18 +122,19 @@ const Shop = () => {
   ));
 
   const listItemsInCart = () => {
-    let cartItems = [];
+    let cartItems: any = [];
 
-    items.forEach((item) => {
+    items.forEach((item: itemProps) => {
       let itemAmt = amountOfItems(item.id);
-      let itemPrice = (item.price +
-        parseFloat((Math.ceil(item.basicTax * 20) / 20)) +
-          parseFloat((Math.ceil(item.importTax * 20) / 20))).toFixed(2);
+      //itemPrice assigned to string for return value of toFixed method
+      let itemPrice: string = (item.price +
+        parseFloat((Math.ceil(item.basicTax * 20) / 20).toString()) +
+          parseFloat((Math.ceil(item.importTax * 20) / 20).toString())).toFixed(2);
 
       if (itemAmt > 1) {
         cartItems.push(
           <div key={item.id}>
-            {`${item.name}`}: {(itemAmt * itemPrice).toFixed(2)} ({itemAmt} @ ${itemPrice})
+            {`${item.name}`}: {(itemAmt * parseFloat(itemPrice)).toFixed(2)} ({itemAmt} @ ${itemPrice})
           </div>);
       } else if (itemAmt === 1) {
         cartItems.push(

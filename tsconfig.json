@@ -13,7 +13,7 @@
     "experimentalDecorators": true,
     "declaration": false,
     "removeComments": false,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noUnusedLocals": false,
     "strict": false,
     "outDir": "dist",
