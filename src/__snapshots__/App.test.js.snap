@@ -1,5 +1,111 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Shop renders correctly 1`] = `
+<div>
+  STORE
+  <div>
+    <div
+      key="1"
+    >
+      Book: $12.49 
+      <button
+        onClick={[Function]}
+        type="submit"
+      >
+        Add
+      </button>
+    </div>
+    <div
+      key="2"
+    >
+      Music CD: $14.99 
+      <button
+        onClick={[Function]}
+        type="submit"
+      >
+        Add
+      </button>
+    </div>
+    <div
+      key="3"
+    >
+      Chocolate bar: $0.85 
+      <button
+        onClick={[Function]}
+        type="submit"
+      >
+        Add
+      </button>
+    </div>
+    <div
+      key="4"
+    >
+      Imported chocolates: $10.00 
+      <button
+        onClick={[Function]}
+        type="submit"
+      >
+        Add
+      </button>
+    </div>
+    <div
+      key="5"
+    >
+      Perfume: $18.99 
+      <button
+        onClick={[Function]}
+        type="submit"
+      >
+        Add
+      </button>
+    </div>
+    <div
+      key="6"
+    >
+      Imported Perfume: $47.50 
+      <button
+        onClick={[Function]}
+        type="submit"
+      >
+        Add
+      </button>
+    </div>
+    <div
+      key="7"
+    >
+      Headache pills: $9.75 
+      <button
+        onClick={[Function]}
+        type="submit"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+  <br />
+  <div>
+    CART 
+  </div>
+  <div>
+    <div>
+      (cart is empty)
+    </div>
+  </div>
+  <br />
+  <div>
+    TOTAL
+  </div>
+  <div>
+    Tax Total: $
+    0
+  </div>
+  <div>
+    Final Total: $
+    0
+  </div>
+</div>
+`;
+
 exports[`renders correctly 1`] = `
 <div>
   <Shop />
